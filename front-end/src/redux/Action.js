@@ -13,8 +13,27 @@ export const Getusers = () => async (dispatch) => {
 
 export const Createuser = (data) => async (dispatch) => {
   try {
-    await axios.post("/user/create",data).then((res) => dispatch(Getusers()));
+    await axios.post("/user/create", data).then((res) => dispatch(Getusers()));
   } catch (error) {
     console.log(error);
   }
 };
+
+export const Deletuser = (id) => async (dispatch) => {
+  try {
+    await fetch("/user/delete/" + id, {
+      method: 'DELETE',
+      headers: { "content-type": "application/json" },
+    }).then((res) => dispatch(Getusers()));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const Edituser = (id,data) => async (dispatch) =>{
+  try {
+    await axios.put('/user/update/'+id,data).then(res=>dispatch(Getusers()))
+  } catch (error) {
+    console.log(error);
+  }
+}
